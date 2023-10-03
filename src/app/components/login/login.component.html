@@ -1,0 +1,39 @@
+<head>
+    <!-- Include an external CSS file for styling -->
+    <link rel="stylesheet" type="text/css" href="login.component.scss">
+</head>
+<body>
+    <!-- Create a container div to hold the login form -->
+    <div class="container">
+        <!-- Create a login container div for the login form elements -->
+        <div class="login-container">
+            <!-- Display the company logo -->
+            <img src="assets/images/people-tech-logo.png" class="logo">
+            <!-- Display the login header -->
+            <h2>LOGIN</h2>
+            <!-- Display a login message -->
+            <p class="login-message">Please enter your credentials to login.</p>
+            <!-- Create a form for user login -->
+            <form [formGroup]="loginForm" class="login-form">
+                <!-- Create a form group for the email input -->
+                <div class="form-group">
+                    <input formControlName="email" type="text" id="email" name="email" placeholder="Email" required>
+                </div>
+                <small *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required','username')" class="text-danger">*Username is required</small>
+                <!-- Create a form group for the password input -->
+                <div class="form-group">
+                    <input formControlName="password" type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')"class="text-danger">*Password is required</small>
+                <!-- Create a button container for the login button -->
+                <div class="button-container">
+                    <!-- Create a login button -->
+                    <button [disabled] = "loginForm.invalid" type="submit" class="login-button" (click)="onLogin()">LOGIN</button>
+                    <!-- Display a message for users who are not registered -->
+                    <p class="not-registered"><a id="forgot" routerLink="/signup">registered?</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+

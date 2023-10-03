@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Timesheet</title>
+    <link rel="stylesheet" href="timesheet.component.scss">
+    <script>
+        function confirmEntry(button) {
+            // Get references to the input elements in the current row
+            const row = button.parentNode.parentNode;
+            const dateInput = row.querySelector('input[type="date"]');
+            const projectNameSelect = row.querySelector('select[name="projectName"]');
+            const activity1Select = row.querySelector('select[name="activity1"]');
+            const activity2Select = row.querySelector('select[name="activity2"]');
+            const categorySelect = row.querySelector('select[name="category"]');
+            const descriptionTextarea = row.querySelector('textarea');
+            const hoursInput = row.querySelector('input[type="number"]');
+
+            // Get the values from the input elements
+            const date = dateInput.value;
+            const projectName = projectNameSelect.value;
+            const activity1 = activity1Select.value;
+            const activity2 = activity2Select.value;
+            const category = categorySelect.value;
+            const description = descriptionTextarea.value;
+            const hours = hoursInput.value;
+
+        // Create a new row for the timesheet table
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td>
+                <button class="edit-button" onclick="editEntry(this)">🖉</button>
+                <button class="deny-button" onclick="denyEntry(this)">✗</button>
+            </td>
+            <td>${date}</td>
+            <td>${projectName}</td>
+            <td>${activity1}</td>
+            <td>${activity2}</td>
+            <td>${category}</td>
+            <td>${description}</td>
+            <td>${hours}</td>
+        `;
+
+        // Append the new row to the table body
+        const tableBody = document.querySelector('.timesheet-table tbody');
+        tableBody.appendChild(newRow);
+
+        // Clear the input fields
+        dateInput.value = '';
+        projectNameSelect.value = '';
+        activity1Select.value = '';
+        activity2Select.value = '';
+        categorySelect.value = '';
+        descriptionTextarea.value = '';
+        hoursInput.value = '';
+
+        // Hide the new entry row
+        const newEntryRow = document.getElementById('newEntry');
+        newEntryRow.style.display = 'none';
+    }
+
+    function denyEntry(button) {
+        // Remove the row when the "Deny" button is clicked
+        const row = button.parentNode.parentNode;
+        row.remove();
+    }
+
+    function editEntry(editButton) {
+        const row = editButton.parentNode.parentNode;
+        const cells = row.querySelectorAll('td');
+
+        if (editButton.innerText === "🖉") { // Check if in view mode
+            // Change the icon to a save icon
+            editButton.innerText = "💾";
+
+            // Enable editing for each cell in the row
+            cells.forEach(cell => {
+                if (cell.children.length === 0) { // Skip the action cell
+                    const value = cell.innerText;
+                    cell.innerHTML = `<input type="text" value="${value}">`;
+                }
+            });
+        } else { // In edit mode, save changes
+            // Change the icon back to an edit icon
+            editButton.innerText = "🖉";
+
+            // Disable editing and update cell values
+            cells.forEach((cell, index) => {
+                if (cell.children.length > 0) {
+                    const newValue = cell.querySelector('input').value;
+                    cell.innerHTML = newValue;
+                }
+            });
+        }
+    }
+</script>
+</head>
+<body>
+     <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="/assets/images/people-tech-logo.png" alt="Company Logo">
+        </div>
+    </header>
+    <section class="banner-section">
+        <div class="banner">
+            <div class="user-info">
+                <div class="user-banner">
+                    <img src="user.png" alt="User Icon">
+                    <span class="welcome-message">Welcome, admin</span>
+                </div>
+                <button class="logout-button"><a href="loginpage.html" class="logout-button">Logout</a></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timesheet Banner -->
+    <section class="timesheet-section">
+        <div class="timesheet-box">
+            <!-- Blue Box for Date and Total Hours -->
+            <div class="date-total-box">
+                <div class="date-labels">
+                    <p><b>Select the date</b></p>
+                    <input type="date" id="date-input" required>
+                </div>
+                <div class="hours-label">
+                    <p><b>Total Hours</b></p>
+                    <div class="field-box">
+                        <p><span id="total-hours"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timesheet Table -->
+        <section class="timesheet-tempelate">
+            <table class="timesheet-table">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Date</th>
+                        <th>Project Name</th>
+                        <th>1st Level Activity</th>
+                        <th>2nd Level Activity</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Existing rows go here -->
+                    <tr>
+                        <td>
+                            <button class="confirm-button" onclick="confirmEntry(this)">✓</button>
+                            <button class="deny-button" onclick="denyEntry(this)">✗</button>
+                        </td>
+                        <td><input type="date" name="entryDate" placeholder="Select" required></td>
+                        <td>
+                            <select name="projectName" required>
+                                <option value="">Select</option>
+                                <!-- Add options dynamically from the backend -->
+                                <option value="Webapp">Project 1</option>
+                                <option value="Machine learning">Project 2</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </td>
+                        <td>
+                            <select name="activity1" required>
+                                <option value="">Select</option>
+                                <!-- Add options dynamically from the backend -->
+                                <option value="activity1">Activity 1</option>
+                                <option value="activity2">Activity 2</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </td>
+                        <td>
+                            <select name="activity2" required>
+                                <option value="">Select</option>
+                                <!-- Add options dynamically from the backend -->
+                                <option value="subactivity1">Subactivity 1</option>
+                                <option value="subactivity2">Subactivity 2</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </td>
+                        <td>
+                            <select name="category" required>
+                                <option value="">Select</option>
+                                <option value="development">Development</option>
+                                <option value="deployment">Deployment</option>
+                                <option value="testing">Testing</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </td>
+                        <td><textarea name="description" rows="4" cols="50" maxlength="225"></textarea></td>
+                        <td><input type="number" name="hours" min="1" max="8" required></td>
+                    </tr>
+                    <!-- New entry row -->
+                    <tr id="newEntry" style="display: none;">
+                        <td>
+                            <!-- Edit button (initially hidden) -->
+                            <button class="edit-button" onclick="editEntry(this)">🖉</button>
+                            <button class="deny-button" onclick="denyEntry(this)">✗</button>
+                        </td>
+                        <!-- Other columns go here -->
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </section>
+
+    <!-- Include the JavaScript file -->
+    <script src="timesheet.js"></script>
+</body>
+</html>
+

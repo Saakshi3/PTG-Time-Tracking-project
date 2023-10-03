@@ -1,0 +1,127 @@
+/* Reset default margin and padding for the entire page */
+body {
+    margin: 0;
+    padding: 0;
+    /* Set background image and styles */
+    background-image: url("login-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* Set font and center content vertically */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centers the content vertically on the viewport */
+}
+
+/* Style for the container holding login content */
+.container {
+    text-align: center;
+}
+
+/* Style for the login container */
+.login-container {
+    width: 300px;
+    background-color: rgb(255, 255, 255);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(240, 240, 240, 0.2);
+}
+
+/* Style for the logo image */
+.logo {
+    display: block;
+    margin: 0 auto 20px; /* Center the logo and add some space below it */
+    max-width: 100%;
+}
+
+/* Define a font-face rule for Calibri Light */
+@font-face {
+    font-family: 'Calibri Light';
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Style for the "LOGIN" heading */
+.login-container h2 {
+    text-align: center;
+    font-size: 26px; /* Adjust the font size as needed */
+    font-family: 'Calibri Light', Arial, sans-serif; /* Specify Calibri Light as the font, fallback to Arial if not available */
+    font-weight: normal; /* Ensure normal font weight */
+    margin-bottom: 5px; /* Add space below the heading */
+}
+
+/* Style for the login message */
+.login-message {
+    text-align: center;
+    font-family: 'Calibri Light', Arial, sans-serif; /* Specify Calibri Light as the font, fallback to Arial if not available */
+    font-size: 14px; /* Adjust the font size as needed */
+    margin-top: 8px; /* Add space above the message */
+}
+
+/* Style for the login form */
+.login-form {
+    margin-top: 20px;
+}
+
+/* Style for form groups (e.g., email and password fields) */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Style for form labels */
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+/* Style for form input fields */
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    margin-top: 8px;
+}
+
+/* Style for the login button */
+.login-button {
+    margin-left: 30px;
+    width: 40%;
+    text-align: center;
+    padding: 4px 4px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Style for the "Not registered" text and hyperlink */
+.not-registered {
+    font-family: 'Calibri Light', Arial, sans-serif; /* Specify Calibri Light as the font, fallback to Arial if not available */
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 30px;
+    font-size: 14px;
+}
+
+/* Style for the hyperlink within the "Not registered" text */
+.not-registered a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Hover effect for the hyperlink within the "Not registered" text */
+.not-registered a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Hover effect for the login button */
+.login-button:hover {
+    background-color: #2f8834; /* Darker green on hover */
+}

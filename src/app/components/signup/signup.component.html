@@ -1,0 +1,68 @@
+<head>
+    <!-- Include the stylesheet for styling -->
+    <link rel="stylesheet" type="text/css" href="signup.component.scss">
+</head>
+<body>
+    <!-- Container for registration content -->
+    <div class="container">
+        <!-- Registration form container -->
+        <div class="registration-container">
+            <!-- Company Logo -->
+            <img src="/assets/images/people-tech-logo.png" alt="Company Logo" class="logo">
+            
+            <!-- Registration header -->
+            <h2>Register</h2>
+            
+            <!-- Registration message -->
+            <p class="registration-message">Please enter your details</p>
+            
+            <!-- Registration form -->
+            <form class="registration-form" [formGroup]="signUpForm">
+                <!-- Firstname input -->
+                <div class="form-group">
+                    <input formControlName= "firstname" type ="text" id="firstname" name="Firstname" placeholder="Firstname" required>
+                </div>
+                <small *ngIf="signUpForm.controls['firstname'].dirty && signUpForm.hasError('required','firstname')"class="text-danger">*Firstname is required</small>
+                
+                <!-- Lastname input -->
+                <div class="form-group">
+                    <input type="text" formControlName= "lastname" id="lastname" name="Lastname" placeholder="Lastname" required>
+                </div>
+                
+                <!-- Email input -->
+                <div class="form-group">
+                    <input formControlName= "email" type="email" id="email" name="Email" placeholder="@peopletech.com" required>
+                </div>
+
+                <!-- WorkLocation input -->
+                <div class="form-group">
+                    <input formControlName="worklocation" type="number" id="worklocation" placeholder="Redmond/New Jersey/India" required>
+                </div>
+                 
+                <!-- Password input -->
+                <div class="form-group">
+                    <input type="password" id="password" formControlName= "password" name="Password" placeholder="Password" required>
+                </div>
+                 
+                <!-- Confirm Password input 
+                <div class="form-group">
+                    <input type="password" id="confirmpassword" name="ConfirmPassword" placeholder="Confirm Password" required>
+                </div>
+                -->
+                
+                <!-- Registration button -->
+                <div class="button-container">
+                    <button type="submit" class="register-button" (click)="onSignUp()">REGISTER</button>
+                </div>
+                
+                <!-- Login link -->
+                <div>
+                    <p class="want-to-login">
+                        <a id="forgot" routerLink="/login">Login?</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
